@@ -1,0 +1,10 @@
+<h1>Edit item</h1>
+
+<%= form_for @item do |f| %></p>
+   <p>Price: <br><%= f.text_field :price %></p>
+   <p>Name: <br><%= f.text_field :name %></p>
+   <p>Weight: <br><%= f.text_field :weight %></p>
+   <p>Description: <br><%= f.text_field :description %></p>
+
+   <p><%= f.submit "Submit" %></p>
+<% end %>

@@ -1,0 +1,24 @@
+<h1>Index</h1>
+
+<% if @items.empty? %>
+  <h4>Store is empty</h4>
+<% else %>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th></th>
+  </tr>
+
+  <% @items.each do |i| %>
+    <tr>
+      <td><%= i.id %></td>
+      <td><%= link_to i.name, i %></td>
+      <td><%= i.price %> rub.</td>
+      <td><%= link_to "Delete", i, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+
+<% end %>
+</table>
