@@ -1,5 +1,8 @@
 class ItemsController < ApplicationController
 
+    before_action :find_item, only:      [:show, :edit, :update, :destroy]
+    before_action :check_if_admin, only: [:edit, :update, :new, :create, :destroy]
+
     # /items GET
     def index
       @items = Item.all
@@ -7,7 +10,7 @@ class ItemsController < ApplicationController
 
     # /items/:id  GET
     def show
-      @item = Item.find(params[:id])
+      # @item = Item.find(params[:id])
     end
 
     # /items/new GET
@@ -17,7 +20,7 @@ class ItemsController < ApplicationController
 
     # /items/:id/edit GET
     def edit
-      @item = Item.find(params[:id])
+      # @item = Item.find(params[:id])
     end
 
     # /items POST
@@ -32,7 +35,7 @@ class ItemsController < ApplicationController
 
     # /items/:id PUT
     def update
-      @item = Item.find(params[:id])
+      # @item = Item.find(params[:id])
       @item.update_attributes(item_params)
       if @item.save
         redirect_to @item
@@ -43,9 +46,8 @@ class ItemsController < ApplicationController
 
     # /items/:id DELETE
     def destroy
-      @item = Item.find(params[:id])
+      # @item = Item.find(params[:id])
       @item.destroy
-
       redirect_to @item
     end
 
@@ -53,6 +55,15 @@ class ItemsController < ApplicationController
 
       def item_params
         params.require(:item).permit(:price, :name, :weight, :description)
+      end
+
+      def find_item
+        @item = Item.find(params[:id])
+      end
+
+      #admin validation
+      def check_if_admin
+        # render plain: "Access denied" unless params[:admin]
       end
 
 end
